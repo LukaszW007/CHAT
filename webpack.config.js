@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'development';
 
 var plugins = [
     new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        template: 'src/static/index.html',
         filename: 'index.html',
         inject: 'body'
     })
@@ -23,20 +23,20 @@ if (env === 'production') {
     );
 }
 module.exports = {
-    entry: ['react-hot-loader/patch','./src/index.js'],
+    entry: ['react-hot-loader/patch', './src/index.js'],
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'app.bundle.js'
     },
-    devtool:'cheap-module-eval-source-map',
+    devtool: 'cheap-module-eval-source-map',
     module: {
         rules: [
             {
                 test: /\.js$/,
                 loader: "babel-loader",
-                exclude:/node_modules/,
+                exclude: /node_modules/,
                 options: {
-                    presets: ['es2015','react'],
+                    presets: ['es2015', 'react'],
                     plugins: ["react-hot-loader/babel"]
                 }
             },
@@ -55,6 +55,12 @@ module.exports = {
         ]
     },
     devServer: {
+        proxy: {
+            '/socket.io': {
+                target: 'http://localhost:3000',
+                ws: true
+            }
+        },
         contentBase: './build',
         hot: true
     },
