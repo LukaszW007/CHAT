@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App.js';
-// import './index.css';
-/*import {AppContainer} from 'react-hot-loader';
+import {AppContainer} from 'react-hot-loader';
 
-const render = Component => {
+/*const render = Component => {
     ReactDOM.render(
         <AppContainer>
             <Component />

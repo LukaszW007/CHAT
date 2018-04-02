@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 const userService= new UserService();
 
-app.use(express.static(__dirname + '/src/static'));
+app.use(express.static(__dirname + '/src'));
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');

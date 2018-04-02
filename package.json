@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/LukaszW007/chat"
   },
-  "homepage": "https://github.com/LukaszW007/chat",
+  "homepage": "https://github.com/LukaszW007/chatnpm ",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
