@@ -37,7 +37,8 @@ class App extends React.Component {
         socket.emit('message',message);
     }
     handleUserSubmit(name){
-
+        this.setState({name});
+        socket.emit('join',name);
     }
     renderUserForm(){
         return(<UserForm onUserSumbit={name=>this.handleUserSubmit(name)}/>)
