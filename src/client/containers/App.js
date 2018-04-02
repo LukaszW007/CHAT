@@ -26,7 +26,7 @@ class App extends React.Component {
     }
     messageReceive(message){
         const messages = [message,...this.state.messages];
-        this.setState({messages}); //equal to  this.setState({messages:messages});
+        this.setState({messages}); //equal to this.setState({messages:messages});
     }
     chatUpdate(users){
         this.setState({users});

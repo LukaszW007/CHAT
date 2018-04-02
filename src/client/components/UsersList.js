@@ -1,19 +1,24 @@
 import React,{Component} from 'react';
+import styles from './UsersList.css';
 
-
-class UsersList extends Component{
-    constructor(props){
-        super(props);
-
-    }
-    render(){
-        // const
-        return(
-            <div className={usersList}>
-                <ul className={listOfUsers}></ul>
+        const UsersList = props=>(
+            <div className={styles.Users}>
+                <div className={styles.UsersOnline}>
+                    {props.users.length} people online
+                </div>
+                <ul className={styles.UsersList}>
+                    {
+                        props.users.map((user) => {
+                            return (    // dlaczego return?
+                                <li key={user.id} className={styles.UserItem}>
+                                    {user.name}
+                                </li>
+                            );
+                        })
+                    }
+                </ul>
             </div>
-        )
-    }
-}
+        );
+
 
 export default UsersList;
