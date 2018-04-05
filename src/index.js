@@ -2,17 +2,19 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const UserService = require('./UserService.js');
+const path= require('path');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 const userService= new UserService();
 
-app.use(express.static(__dirname + '/src'));
+// app.use(express.static(__dirname + '../build'));
+app.use('/', express.static(path.join(__dirname, '../build')))
 
-app.get('/', function (req, res) {
+/*app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-});
+});*/
 
 io.on('connection', function (socket) {
     socket.on('join', function (name) {
