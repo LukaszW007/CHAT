@@ -5,9 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "webpack-dev-server --open --inline --hot --config ./webpack.config.js",
-    "startwebpack": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:front": "webpack-dev-server --open",
+    "start:back": "node server/index",
+    "start": "concurrently \"npm run start:back\" \"npm run start:front\""
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
   "dependencies": {
     "ajv-keywords": "^3.1.0",
     "colors": "^1.1.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.3",
     "react-bootstrap": "^0.32.1",
     "socket.io": "^2.0.4",
