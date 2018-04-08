@@ -7,64 +7,64 @@ const env = process.env.NODE_ENV || 'development';
 
 var plugins = [
     new HtmlWebpackPlugin({
-        template: 'src/static/index.html',
+        template: 'client/index.html',
         filename: 'index.html',
-        inject: 'body'
-    })
+        inject: 'body',
+    }),
 ];
-console.log('NODE_ENV:', env);
 
 if (env === 'production') {
     plugins.push(
         new webpack.optimize.UglifyJsPlugin(),
         new OptimizeJsPlugin({
-            sourceMap: false
+            sourceMap: false,
         })
     );
+} else {
+    plugins.push(new webpack.HotModuleReplacementPlugin());
 }
+
 module.exports = {
-    entry: ['react-hot-loader/patch', './src/client/index.js'],
+    entry: ['react-hot-loader/patch', './client/index.js'],
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: 'app.bundle.js'
+        path: path.resolve(__dirname, 'server/static'),
+        filename: 'app.bundle.js',
     },
     devtool: 'cheap-module-eval-source-map',
     module: {
         rules: [
             {
                 test: /\.js$/,
-                loader: "babel-loader",
+                loader: 'babel-loader',
                 exclude: /node_modules/,
                 options: {
                     presets: ['es2015', 'react'],
-                    plugins: ["react-hot-loader/babel"]
-                }
+                    plugins: ['react-hot-loader/babel'],
+                },
             },
             {
                 test: /\.css$/,
                 use: [
-                    {loader: 'style-loader'},
+                    { loader: 'style-loader' },
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true
-                        }
-                    }
-                ]
-            }
-        ]
+                            modules: true,
+                        },
+                    },
+                ],
+            },
+        ],
     },
     devServer: {
         proxy: {
             '/socket.io': {
                 target: 'http://localhost:3000',
-                ws: true
-            }
+                ws: true,
+            },
         },
         contentBase: './build',
-        hot: true
+        hot: true,
     },
-    plugins
-
-
+    plugins,
 };
